@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-text">
+            <h1 class="hero-title">MINIMAL DESIGN.<br><span class="blue">MAXIMUM IMPACT.</span></h1>
+            <p class="hero-subtitle">Experience shopping in pure black & white with blue accents</p>
+            <a href="{% url 'shop' %}" class="btn btn-blue">SHOP NOW →</a>
+        </div>
+        <div class="hero-image">
+            <div class="image-placeholder animated-slide">
+                <!-- Animated black & white product image will go here -->
+                <div class="product-showcase">
+                    <div class="product-circle"></div>
+                    <div class="product-circle"></div>
+                    <div class="product-circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="featured">
+    <div class="section-header">
+        <h2>FEATURED <span class="blue">PRODUCTS</span></h2>
+        <p>Curated selection of our best items</p>
+    </div>
+    
+    <div class="products-grid">
+        {% for product in featured_products %}
+        <div class="product-card">
+            <div class="product-image">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                <div class="image-placeholder">No Image</div>
+                {% endif %}
+                <div class="product-overlay">
+                    <button class="quick-view" data-id="{{ product.id }}">Quick View</button>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p class="product-price">৳{{ product.price }}</p>
+                <button class="add-to-cart" data-id="{{ product.id }}">Add to Cart</button>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-products">
+            <p>No featured products available.</p>
+            <a href="{% url 'shop' %}" class="btn">Browse All Products</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shipping-fast"></i>
+            </div>
+            <h3>Free Delivery</h3>
+            <p>On orders over ৳2000</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <h3>Call to Confirm</h3>
+            <p>We call to verify your order</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Secure Checkout</h3>
+            <p>No login required</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-download"></i>
+            </div>
+            <h3>Easy Invoice</h3>
+            <p>Download invoice instantly</p>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta">
+    <div class="cta-container">
+        <h2>READY TO EXPERIENCE<br><span class="blue">MINIMALIST SHOPPING?</span></h2>
+        <p>No accounts, no passwords, just pure shopping experience</p>
+        <a href="{% url 'shop' %}" class="btn btn-blue">START SHOPPING →</a>
+    </div>
+</section>
+
+<!-- Quick View Modal -->
+<div id="quickViewModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="modal-product-details">
+            <!-- Product details will be loaded here via JavaScript -->
+        </div>
+    </div>
+</div>
+{% endblock %}
