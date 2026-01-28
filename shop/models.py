@@ -1,48 +1,33 @@
 from django.db import models
 
 class Product(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='products/', default='products/default.jpg')
-    category = models.CharField(max_length=100, default='Uncategorized')
-    stock = models.IntegerField(default=10)
+    name = models.CharField(max_length=200, verbose_name="Product Name")
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)  # URL-এর জন্য (অপশনাল)
+    
+    # ছবি (একাধিক ছবি রাখতে চাইলে পরে Gallery মডেল যোগ করা যাবে)
+    main_image = models.ImageField(upload_to='media/products/', verbose_name="Main Image", null=True, blank=True)
+    
+    # ডেসক্রিপশন
+    short_description = models.TextField(verbose_name="Short Description", blank=True)
+    full_description = models.TextField(verbose_name="Full Description", blank=True)
+    
+    # স্পেসিফিকেশন (একটা বড় টেক্সট ফিল্ডে সব লিখে দাও, পরে টেবিল করা যাবে)
+    specifications = models.TextField(verbose_name="Specifications", blank=True)
+    
+    # রেটিং
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0.0, verbose_name="Rating")
+    review_count = models.PositiveIntegerField(default=0, verbose_name="Number of Reviews")
+    
+    # অতিরিক্ত ইনফো
+    category = models.CharField(max_length=100, blank=True, verbose_name="Category (e.g. Headphones)")
+    is_featured = models.BooleanField(default=False, verbose_name="Featured Product?")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+        ordering = ['-created_at']
+
     def __str__(self):
         return self.name
-
-class Order(models.Model):
-    ORDER_STATUS = [
-        ('pending', 'Pending'),
-        ('confirmed', 'Confirmed'),
-        ('shipped', 'Shipped'),
-        ('delivered', 'Delivered'),
-        ('cancelled', 'Cancelled'),
-    ]
-    
-    order_id = models.CharField(max_length=20, unique=True)
-    customer_name = models.CharField(max_length=100)
-    customer_phone = models.CharField(max_length=15)
-    customer_email = models.EmailField(blank=True, null=True)
-    customer_address = models.TextField()
-    city = models.CharField(max_length=100)
-    order_notes = models.TextField(blank=True, null=True)
-    
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    status = models.CharField(max_length=20, choices=ORDER_STATUS, default='pending')
-    admin_notes = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return f"Order {self.order_id} - {self.customer_name}"
-
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    
-    def __str__(self):
-        return f"{self.quantity} x {self.product.name}"

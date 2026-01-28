@@ -1,0 +1,480 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Specifications Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="page-title animate-fade-up">Technical Specifications</h1>
+            <p class="page-subtitle animate-fade-up delay-200">Detailed technical specifications for all Voxio products</p>
+        </div>
+    </section>
+
+    <!-- Specifications Content -->
+    <section class="specifications-section">
+        <div class="container">
+            <!-- Product Filter -->
+            <div class="specs-filter animate-on-scroll">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Products</button>
+                    <button class="filter-btn" data-filter="headphones">Headphones</button>
+                    <button class="filter-btn" data-filter="smartwatches">Smartwatches</button>
+                    <button class="filter-btn" data-filter="earbuds">Earbuds</button>
+                </div>
+            </div>
+
+            <!-- Headphones Specifications -->
+            <div class="specs-category" id="headphones-specs" data-category="headphones">
+                <div class="specs-header">
+                    <h2 class="specs-title">Voxio Overdrive Headphones</h2>
+                    <div class="specs-image">
+                        <img src="images/product1.jpg" alt="Voxio Overdrive Headphones" class="animate-on-scroll">
+                    </div>
+                </div>
+                
+                <div class="specs-tables">
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-volume-up"></i> Audio Specifications</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Driver Type</td>
+                                    <td>40mm Dynamic Drivers</td>
+                                </tr>
+                                <tr>
+                                    <td>Frequency Response</td>
+                                    <td>10Hz - 40kHz</td>
+                                </tr>
+                                <tr>
+                                    <td>Impedance</td>
+                                    <td>32 ohms</td>
+                                </tr>
+                                <tr>
+                                    <td>Sensitivity</td>
+                                    <td>105dB ± 3dB</td>
+                                </tr>
+                                <tr>
+                                    <td>Noise Cancellation</td>
+                                    <td>Active Noise Cancellation (ANC)</td>
+                                </tr>
+                                <tr>
+                                    <td>Microphone</td>
+                                    <td>Dual Beamforming Mics with Noise Reduction</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-battery-full"></i> Battery & Connectivity</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Battery Life (ANC On)</td>
+                                    <td>30 hours</td>
+                                </tr>
+                                <tr>
+                                    <td>Battery Life (ANC Off)</td>
+                                    <td>40 hours</td>
+                                </tr>
+                                <tr>
+                                    <td>Charging Time</td>
+                                    <td>2 hours (0-100%)</td>
+                                </tr>
+                                <tr>
+                                    <td>Quick Charge</td>
+                                    <td>15 min = 5 hours playback</td>
+                                </tr>
+                                <tr>
+                                    <td>Wireless</td>
+                                    <td>Bluetooth 5.2</td>
+                                </tr>
+                                <tr>
+                                    <td>Wired Connection</td>
+                                    <td>3.5mm audio jack included</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-cube"></i> Physical Specifications</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>265g (without cable)</td>
+                                </tr>
+                                <tr>
+                                    <td>Ear Cushions</td>
+                                    <td>Memory foam, protein leather</td>
+                                </tr>
+                                <tr>
+                                    <td>Foldable</td>
+                                    <td>Yes, with carrying case</td>
+                                </tr>
+                                <tr>
+                                    <td>Water Resistance</td>
+                                    <td>IPX4 (splash resistant)</td>
+                                </tr>
+                                <tr>
+                                    <td>Colors</td>
+                                    <td>Matte Black, Silver, Midnight Blue</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smartwatches Specifications -->
+            <div class="specs-category" id="smartwatch-specs" data-category="smartwatches">
+                <div class="specs-header">
+                    <h2 class="specs-title">Voxio Chrono Smartwatch</h2>
+                    <div class="specs-image">
+                        <img src="images/product2.jpg" alt="Voxio Chrono Smartwatch" class="animate-on-scroll">
+                    </div>
+                </div>
+                
+                <div class="specs-tables">
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-heartbeat"></i> Health & Fitness</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Heart Rate Monitor</td>
+                                    <td>24/7 monitoring with alerts</td>
+                                </tr>
+                                <tr>
+                                    <td>Blood Oxygen</td>
+                                    <td>SpO2 monitoring</td>
+                                </tr>
+                                <tr>
+                                    <td>Sleep Tracking</td>
+                                    <td>Advanced sleep stages analysis</td>
+                                </tr>
+                                <tr>
+                                    <td>Stress Monitoring</td>
+                                    <td>HRV-based stress tracking</td>
+                                </tr>
+                                <tr>
+                                    <td>Workout Modes</td>
+                                    <td>100+ sports modes</td>
+                                </tr>
+                                <tr>
+                                    <td>GPS</td>
+                                    <td>Dual-frequency GPS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-microchip"></i> Technical Specifications</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Display</td>
+                                    <td>1.43" AMOLED, 466x466 pixels</td>
+                                </tr>
+                                <tr>
+                                    <td>Processor</td>
+                                    <td>Dual-core 1.2GHz</td>
+                                </tr>
+                                <tr>
+                                    <td>RAM</td>
+                                    <td>2GB</td>
+                                </tr>
+                                <tr>
+                                    <td>Storage</td>
+                                    <td>16GB</td>
+                                </tr>
+                                <tr>
+                                    <td>Battery Life</td>
+                                    <td>14 days (typical use)</td>
+                                </tr>
+                                <tr>
+                                    <td>Charging</td>
+                                    <td>Magnetic charging dock</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-shield-alt"></i> Build & Compatibility</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water Resistance</td>
+                                    <td>5 ATM (50 meters)</td>
+                                </tr>
+                                <tr>
+                                    <td>Case Material</td>
+                                    <td>Aerospace-grade aluminum</td>
+                                </tr>
+                                <tr>
+                                    <td>Strap Material</td>
+                                    <td>Fluoroelastomer (silicone alternative)</td>
+                                </tr>
+                                <tr>
+                                    <td>Operating System</td>
+                                    <td>Voxio OS 2.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Compatibility</td>
+                                    <td>iOS 12+, Android 8+</td>
+                                </tr>
+                                <tr>
+                                    <td>Sensors</td>
+                                    <td>Accelerometer, Gyroscope, Compass, Ambient Light</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earbuds Specifications -->
+            <div class="specs-category" id="earbuds-specs" data-category="earbuds">
+                <div class="specs-header">
+                    <h2 class="specs-title">Voxio Pulse Earbuds</h2>
+                    <div class="specs-image">
+                        <img src="images/product3.jpg" alt="Voxio Pulse Earbuds" class="animate-on-scroll">
+                    </div>
+                </div>
+                
+                <div class="specs-tables">
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-music"></i> Audio Performance</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Driver Size</td>
+                                    <td>10mm dynamic drivers</td>
+                                </tr>
+                                <tr>
+                                    <td>Frequency Response</td>
+                                    <td>20Hz - 20kHz</td>
+                                </tr>
+                                <tr>
+                                    <td>Codec Support</td>
+                                    <td>AAC, SBC, aptX Adaptive</td>
+                                </tr>
+                                <tr>
+                                    <td>Noise Cancellation</td>
+                                    <td>Hybrid Active Noise Cancellation</td>
+                                </tr>
+                                <tr>
+                                    <td>Transparency Mode</td>
+                                    <td>Adjustable ambient sound</td>
+                                </tr>
+                                <tr>
+                                    <td>Microphones</td>
+                                    <td>6 mics with AI noise reduction</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-bolt"></i> Battery & Controls</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Earbud Battery</td>
+                                    <td>8 hours (ANC on), 10 hours (ANC off)</td>
+                                </tr>
+                                <tr>
+                                    <td>Case Battery</td>
+                                    <td>Additional 24 hours</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Playback</td>
+                                    <td>32 hours with case</td>
+                                </tr>
+                                <tr>
+                                    <td>Charging Time</td>
+                                    <td>1.5 hours (case), 15 min quick charge</td>
+                                </tr>
+                                <tr>
+                                    <td>Wireless Charging</td>
+                                    <td>Qi-certified wireless charging case</td>
+                                </tr>
+                                <tr>
+                                    <td>Controls</td>
+                                    <td>Touch controls with customizable gestures</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="specs-table-container animate-on-scroll">
+                        <h3><i class="fas fa-wifi"></i> Connectivity & Design</h3>
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bluetooth</td>
+                                    <td>Bluetooth 5.3</td>
+                                </tr>
+                                <tr>
+                                    <td>Range</td>
+                                    <td>Up to 15 meters (50 feet)</td>
+                                </tr>
+                                <tr>
+                                    <td>Water Resistance</td>
+                                    <td>IPX7 (sweat and rain resistant)</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight (each earbud)</td>
+                                    <td>4.7g</td>
+                                </tr>
+                                <tr>
+                                    <td>Fit Options</td>
+                                    <td>4 sizes of ear tips included</td>
+                                </tr>
+                                <tr>
+                                    <td>Colors</td>
+                                    <td>Obsidian Black, Lunar Silver, Aurora Blue</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison Section -->
+            <div class="comparison-section animate-on-scroll">
+                <h2 class="section-title">Quick Comparison</h2>
+                <div class="comparison-table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Overdrive Headphones</th>
+                                <th>Chrono Smartwatch</th>
+                                <th>Pulse Earbuds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Battery Life</td>
+                                <td>40 hours</td>
+                                <td>14 days</td>
+                                <td>32 hours (with case)</td>
+                            </tr>
+                            <tr>
+                                <td>Water Resistance</td>
+                                <td>IPX4</td>
+                                <td>5 ATM</td>
+                                <td>IPX7</td>
+                            </tr>
+                            <tr>
+                                <td>Weight</td>
+                                <td>265g</td>
+                                <td>38g</td>
+                                <td>4.7g (per earbud)</td>
+                            </tr>
+                            <tr>
+                                <td>Bluetooth</td>
+                                <td>5.2</td>
+                                <td>5.2</td>
+                                <td>5.3</td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>$249.99</td>
+                                <td>$199.99</td>
+                                <td>$129.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

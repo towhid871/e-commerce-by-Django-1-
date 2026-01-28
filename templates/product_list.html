@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<body class="product-list-page">
+
+    <!-- Page Header -->
+    <section class="page-header text-white text-center">
+        <div class="container">
+            <h1 class="page-title fw-bold">
+                All Products
+            </h1>
+            <p class="page-subtitle">
+                Explore our premium collection of cutting-edge gadgets
+            </p>
+        </div>
+    </section>
+
+    <!-- Products Grid Section -->
+    <section class="all-products">
+        <div class="container">
+            <div class="products-grid">
+                {% for product in products %}
+                    <div class="product-card animate-on-scroll">
+                        <div class="product-image">
+                            {% if product.main_image %}
+                                <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{% static 'images/placeholder-product.jpg' %}" alt="Placeholder">
+                            {% endif %}
+                            
+                            <!-- Overlay on Hover -->
+                            <div class="product-overlay">
+                                <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline">View Details</a>
+                            </div>
+
+                            <!-- Badge -->
+                            {% if product.is_featured %}
+                                <div class="product-badge">Best Seller</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="product-info">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="product-category">{{ product.category }}</p>
+
+                            <p class="product-description">
+                                {{ product.short_description|truncatewords:30 }}
+                            </p>
+
+                            <!-- Rating -->
+                            <div class="product-rating">
+                                {% for i in "x"|ljust:5 %}
+                                    {% if forloop.counter <= product.rating|floatformat:0 %}
+                                        <i class="fas fa-star"></i>
+                                    {% elif forloop.counter == product.rating|floatformat:0|add:1 and product.rating|floatformat:1 > product.rating|floatformat:0 %}
+                                        <i class="fas fa-star-half-alt"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="rating-value">{{ product.rating }} ({{ product.review_count }})</span>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="no-products">
+                        <h2>No products found</h2>
+                        <p>Check back later or browse other categories.</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination (যদি অনেক প্রোডাক্ট হয়) -->
+            {% if is_paginated %}
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <span class="page-link active">{{ num }}</span>
+                        {% else %}
+                            <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+</body> 
+{% endblock %}

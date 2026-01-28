@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="error-404">
+        <div class="error-box animate-on-scroll">
+            <h1 class="error-title">Wait</h1>
+            <h2 class="error-subtitle">Oops! Page is under construction</h2>
+            <p class="error-message">Looks like you're waiting for this. Thanks for staying with us</p>
+            
+            <div class="slider">
+                <img src="{% static 'images/error.png' %}" alt="Error Illustration">
+            </div>
+
+            <div class="error-actions">
+                <a href="{% url 'home' %}" class="btn btn-primary">Go to Home</a>
+                <a href="https://poki.com/en/g/plonky" target="_blank" class="btn btn-alt">Play Games!</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

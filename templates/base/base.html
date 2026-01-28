@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black & White E-Commerce</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="{% url 'home' %}" class="logo">
+                <img src="{% static '/images/logo.png' %}" alt="Voxio Logo" class="logo-img">
+                </a>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'product_list' %}">Products</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'connect' %}">Connect</a></li>
+                    <li class="nav-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/voxio2"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="{% url 'home' %}" class="logo">
+                    <img src="{% static '/images/logo.png' %}" alt="Voxio Logo" class="logo-img">
+                    </a>
+                    <p class="footer-description">Elevating everyday life through innovative technology and premium design.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/voxio2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- <div class="footer-col">
+                    <h3 class="footer-title">Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="info.html#headphones">Headphones</a></li>
+                        <li><a href="info.html#smartwatches">Smartwatches</a></li>
+                        <li><a href="info.html#earbuds">Earbuds</a></li>
+                        <li><a href="specifications.html">Specifications</a></li>
+                    </ul>
+                </div> -->
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'home' %}">About Voxio</a></li>
+                        <li><a href="{% url 'connect' %}">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Where to Buy</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.facebook.com/voxio2">Voxio Social Platform</a></li>
+                        <li><a href="https://www.daraz.com.bd/shop/8i0pgyaf/?spm=a2a0e.pdp_revamp.seller.1.7339a14asEE7GY&itemId=574776218&channelSource=pdp">Daraz</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Voxio. All rights reserved. | <a href="{% url 'error' %}">Privacy Policy</a> | <a href="{% url 'error' %}">Terms of Service</a></p>
+                <p class="footer-note">Voxio is an online gadget and tech brand. This website is for informational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

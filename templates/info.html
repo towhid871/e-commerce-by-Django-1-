@@ -1,0 +1,107 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+
+
+
+
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="page-title animate-fade-up">Product Information</h1>
+            <p class="page-subtitle animate-fade-up delay-200">Detailed information about our premium tech products</p>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <!-- Headphones -->
+            <div class="info-category" id="headphones">
+                <h2 class="category-title">Headphones</h2>
+                <div class="category-grid">
+                    <div class="category-image animate-on-scroll">
+                        <img src="images/product1.jpg" alt="Voxio Headphones">
+                    </div>
+                    <div class="category-content animate-on-scroll">
+                        <h3>Premium Audio Experience</h3>
+                        <p>Voxio headphones are engineered for the ultimate audio experience. With advanced noise cancellation technology, you can immerse yourself in your music without distractions.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Active Noise Cancellation</li>
+                            <li><i class="fas fa-check-circle"></i> 40-hour battery life</li>
+                            <li><i class="fas fa-check-circle"></i> Premium memory foam ear cushions</li>
+                            <li><i class="fas fa-check-circle"></i> Voice assistant compatibility</li>
+                            <li><i class="fas fa-check-circle"></i> Foldable design for portability</li>
+                        </ul>
+                        <div class="cta-buttons">
+                            <a href="specifications.html#headphones-specs" class="btn btn-primary">View Specifications</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Smartwatches -->
+            <div class="info-category" id="smartwatches">
+                <h2 class="category-title">Smartwatches</h2>
+                <div class="category-grid reverse">
+                    <div class="category-content animate-on-scroll">
+                        <h3>Your Health & Fitness Companion</h3>
+                        <p>The Voxio Chrono smartwatch is designed to keep up with your active lifestyle while providing essential health monitoring and smart features.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Heart rate and blood oxygen monitoring</li>
+                            <li><i class="fas fa-check-circle"></i> 14-day battery life</li>
+                            <li><i class="fas fa-check-circle"></i> Water resistant up to 50 meters</li>
+                            <li><i class="fas fa-check-circle"></i> GPS and activity tracking</li>
+                            <li><i class="fas fa-check-circle"></i> Smart notifications</li>
+                        </ul>
+                        <div class="cta-buttons">
+                            <a href="specifications.html#smartwatch-specs" class="btn btn-primary">View Specifications</a>
+                        </div>
+                    </div>
+                    <div class="category-image animate-on-scroll">
+                        <img src="images/product2.jpg" alt="Voxio Smartwatch">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Earbuds -->
+            <div class="info-category" id="earbuds">
+                <h2 class="category-title">Earbuds</h2>
+                <div class="category-grid">
+                    <div class="category-image animate-on-scroll">
+                        <img src="images/product3.jpg" alt="Voxio Earbuds">
+                    </div>
+                    <div class="category-content animate-on-scroll">
+                        <h3>AirPods Pro (2nd Generation)</h3>
+                        <p>Experience premium sound with Apple AirPods Pro (2nd Generation), featuring advanced Active Noise Cancellation, Adaptive Transparency, and Personalized Spatial Audio for an immersive listening experience.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> True wireless design</li>
+                            <li><i class="fas fa-check-circle"></i> Adaptive sound technology</li>
+                            <li><i class="fas fa-check-circle"></i> 8-hour battery (32 with case)</li>
+                            <li><i class="fas fa-check-circle"></i> Touch controls</li>
+                        </ul>
+                        <div class="cta-buttons">
+                            <a href="specifications.html#earbuds-specs" class="btn btn-primary">View Specifications</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

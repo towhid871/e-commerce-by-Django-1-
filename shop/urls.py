@@ -1,15 +1,24 @@
 from django.urls import path
-from . import views
+from .views import (
+    Custom404View,
+    HomePageView,
+    # InfoPageView,
+    ProductListView,
+    ProductDetailView,
+    # SpecificationsPageView,
+    AboutPageView,
+    ConnectPageView,
+)
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
-    path('shop/', views.shop, name='shop'),
-    path('cart/', views.cart, name='cart'),
-    path('update-cart/', views.update_cart, name='update_cart'),
-    # We'll add checkout later
-    # path('checkout/', views.checkout, name='checkout'),
+    path('', HomePageView.as_view(), name='home'),
+    # path('info/', InfoPageView.as_view(), name='info'),
+    # path('specifications/', SpecificationsPageView.as_view(), name='specifications'),
+    path('about/', AboutPageView.as_view(), name='about'),
+    path('connect/', ConnectPageView.as_view(), name='connect'),
+    path('products/', ProductListView.as_view(), name='product_list'),
+    path('products/<slug:slug>/', ProductDetailView.as_view(), name='product_detail'),
+    path('error/', Custom404View.as_view(), name='error'),
+    
+    
 ]
-
-

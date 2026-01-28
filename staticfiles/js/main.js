@@ -1,181 +1,216 @@
-// Main JavaScript for E-commerce
+// Main JavaScript for Voxio Website
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Cart functionality
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
-    // Update cart count
-    function updateCartCount() {
-        const cartCount = document.getElementById('cart-count');
-        if (cartCount) {
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
-        }
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+        });
     }
     
-    // Add to cart
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.getAttribute('data-id');
-            const productName = this.closest('.product-info').querySelector('h3').textContent;
-            const productPrice = this.closest('.product-info').querySelector('.product-price').textContent;
+    // Close mobile menu when clicking on a link
+    const navItems = document.querySelectorAll('.nav-links a');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
+    
+    // Hero Slider
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    
+    // Auto slide change every 5 seconds
+    if (slides.length > 0) {
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+    }
+    
+    // Scroll Animations
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
             
-            // Remove ৳ symbol and convert to number
-            const price = parseFloat(productPrice.replace('৳', ''));
-            
-            // Check if product already in cart
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id: productId,
-                    name: productName,
-                    price: price,
-                    quantity: 1
-                });
+            if (elementPosition < screenPosition) {
+                element.classList.add('animated');
             }
-            
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // Update cart count
-            updateCartCount();
-            
-            // Show success message
-            showNotification('Product added to cart!', 'success');
-        });
-    });
-    
-    // Quick View Modal
-    const modal = document.getElementById('quickViewModal');
-    const closeModal = document.querySelector('.close-modal');
-    
-    document.querySelectorAll('.quick-view').forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.getAttribute('data-id');
-            // In a real application, you would fetch product details via AJAX
-            showQuickView(productId);
-        });
-    });
-    
-    if (closeModal) {
-        closeModal.addEventListener('click', function() {
-            modal.style.display = 'none';
         });
     }
     
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+    // Run on load and scroll
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
     
-    function showQuickView(productId) {
-        // For now, show a placeholder
-        const modalContent = document.getElementById('modal-product-details');
-        modalContent.innerHTML = `
-            <h2>Product Details</h2>
-            <p>Product ID: ${productId}</p>
-            <p>Full product details would be loaded here via AJAX.</p>
-            <button class="btn add-to-cart" data-id="${productId}">Add to Cart</button>
-        `;
-        
-        modal.style.display = 'block';
-        
-        // Re-attach event listener to the new button
-        modalContent.querySelector('.add-to-cart').addEventListener('click', function() {
-            // Add to cart logic here
-            showNotification('Product added from quick view!', 'success');
-        });
-    }
-    
-    function showNotification(message, type) {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.innerHTML = `
-            <span>${message}</span>
-            <button class="close-notification">&times;</button>
-        `;
-        
-        // Add styles
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 2rem;
-            background: ${type === 'success' ? '#0066cc' : '#cc0000'};
-            color: white;
-            border-radius: 5px;
-            z-index: 1002;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            animation: slideIn 0.3s ease;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Add close button functionality
-        notification.querySelector('.close-notification').addEventListener('click', function() {
-            notification.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        });
-        
-        // Auto remove after 3 seconds
-        setTimeout(() => {
-            if (document.body.contains(notification)) {
-                notification.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Skip if it's a non-page anchor
+            if (href === '#' || href.startsWith('#!')) return;
+            
+            // If it's an internal page anchor
+            if (href.includes('#')) {
+                e.preventDefault();
+                const [page, anchorId] = href.split('#');
+                
+                // If we're on the same page, scroll to anchor
+                if (window.location.pathname.endsWith(page) || (page === '' && anchorId)) {
+                    const targetElement = document.getElementById(anchorId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
                     }
-                }, 300);
+                }
+                // Otherwise, navigate to the page (handled by HTML link)
             }
-        }, 3000);
+        });
+    });
+    
+    // Product card hover effect enhancement
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.zIndex = '10';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.zIndex = '1';
+        });
+    });
+    
+    // Form validation for contact page
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+            let isValid = true;
+            
+            // Simple validation
+            if (!name.value.trim()) {
+                showError(name, 'Name is required');
+                isValid = false;
+            } else {
+                clearError(name);
+            }
+            
+            if (!email.value.trim() || !isValidEmail(email.value)) {
+                showError(email, 'Valid email is required');
+                isValid = false;
+            } else {
+                clearError(email);
+            }
+            
+            if (!message.value.trim()) {
+                showError(message, 'Message is required');
+                isValid = false;
+            } else {
+                clearError(message);
+            }
+            
+            if (isValid) {
+                // Show success message
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Message Sent!';
+                submitBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                }, 3000);
+            }
+        });
     }
     
-    // Animation for notification
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+    // Helper functions for form validation
+    function showError(input, message) {
+        const formGroup = input.parentElement;
+        const errorElement = formGroup.querySelector('.error-message') || document.createElement('div');
+        
+        errorElement.className = 'error-message';
+        errorElement.textContent = message;
+        errorElement.style.color = '#ff6b6b';
+        errorElement.style.fontSize = '0.85rem';
+        errorElement.style.marginTop = '5px';
+        
+        if (!formGroup.querySelector('.error-message')) {
+            formGroup.appendChild(errorElement);
         }
         
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        .close-notification {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-            line-height: 1;
-        }
-    `;
-    document.head.appendChild(style);
+        input.style.borderColor = '#ff6b6b';
+    }
     
-    // Initialize cart count
-    updateCartCount();
+    function clearError(input) {
+        const formGroup = input.parentElement;
+        const errorElement = formGroup.querySelector('.error-message');
+        
+        if (errorElement) {
+            errorElement.remove();
+        }
+        
+        input.style.borderColor = '';
+    }
+    
+    function isValidEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
+    // Add active class to current page in navigation
+    function setActiveNavLink() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href');
+            if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+    
+    setActiveNavLink();
+    
+    // Add loading animation to page
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Remove initial fade-in animations after they've played
+        setTimeout(() => {
+            const fadeElements = document.querySelectorAll('.animate-fade-up, .animate-fade-in');
+            fadeElements.forEach(el => {
+                el.style.animation = 'none';
+                el.style.opacity = '1';
+            });
+        }, 1000);
+    });
 });

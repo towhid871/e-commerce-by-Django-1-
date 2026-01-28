@@ -1,35 +1,28 @@
 from django.contrib import admin
-from .models import Product, Order, OrderItem
-
-class OrderItemInline(admin.TabularInline):
-    model = OrderItem
-    extra = 0
-
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ['order_id', 'customer_name', 'customer_phone', 'total_amount', 'status', 'created_at']
-    list_filter = ['status', 'created_at']
-    search_fields = ['order_id', 'customer_name', 'customer_phone']
-    inlines = [OrderItemInline]
-    readonly_fields = ['created_at']
-    
-    fieldsets = (
-        ('Order Information', {
-            'fields': ('order_id', 'total_amount', 'status', 'created_at')
-        }),
-        ('Customer Information', {
-            'fields': ('customer_name', 'customer_phone', 'customer_email', 'customer_address', 'city')
-        }),
-        ('Notes', {
-            'fields': ('order_notes', 'admin_notes'),
-            'classes': ('collapse',)
-        }),
-    )
+from .models import Product
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'category', 'stock']
-    list_filter = ['category']
-    search_fields = ['name', 'description']
+    list_display = ('name', 'category', 'rating', 'review_count', 'is_featured', 'created_at')
+    list_filter = ('category', 'is_featured', 'rating')
+    search_fields = ('name', 'short_description', 'full_description')
+    list_editable = ('rating', 'is_featured')
+    readonly_fields = ('created_at', 'updated_at')
     
-admin.site.register(OrderItem)
+    fieldsets = (
+        ('Basic Info', {
+            'fields': ('name', 'slug', 'category', 'main_image')
+        }),
+        ('Descriptions', {
+            'fields': ('short_description', 'full_description', 'specifications')
+        }),
+        ('Rating & Status', {
+            'fields': ('rating', 'review_count', 'is_featured')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    prepopulated_fields = {'slug': ('name',)}  # অটো স্লাগ তৈরি হবে

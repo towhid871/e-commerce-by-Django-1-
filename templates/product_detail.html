@@ -1,0 +1,84 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<body class="details_view">
+    
+    <section class="product-detail-section">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="{% url 'home' %}">Home</a>
+                <span>></span>
+                <a href="{% url 'product_list' %}">Products</a>
+                <span>></span>
+                <span>{{ product.name }}</span>
+            </nav>
+
+            <div class="product-main">
+                <!-- Product Image -->
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image-wrapper">
+                    {% if product.main_image %}
+                        <img src="{{ product.main_image.url }}" alt="{{ product.name }}" class="main-product-img">
+                    {% else %}
+                        <img src="{% static 'images/placeholder-product.jpg' %}" alt="No Image" class="main-product-img">
+                    {% endif %}
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info-column">
+                    <h1 class="product-title">{{ product.name }}</h1>
+                    <p class="product-category">{{ product.category }}</p>
+
+                    <!-- Rating -->
+                    <div class="product-rating">
+                        {% for i in "x"|ljust:5 %}
+                            {% if forloop.counter <= product.rating|floatformat:0 %}
+                                <i class="fas fa-star filled"></i>
+                            {% elif forloop.counter == product.rating|floatformat:0|add:1 and product.rating|floatformat:1 > product.rating|floatformat:0 %}
+                                <i class="fas fa-star-half-alt filled"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                        <span>({{ product.review_count }} reviews)</span>
+                    </div>
+
+                    <!-- Short Description -->
+                    <div class="product-short-desc">
+                        <p>{{ product.short_description }}</p>
+                    </div>
+
+                    <!-- Full Description -->
+                    <div class="product-description">
+                        <h3>Description</h3>
+                        {{ product.full_description|linebreaks }}
+                    </div>
+
+                    <!-- Specifications -->
+                    <div class="product-specifications">
+                        <h3>Specifications</h3>
+                        <div class="specs-list">
+                            {{ product.specifications|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products (অপশনাল) -->
+            <section class="related-products">
+                <h2>Related Products</h2>
+                <!-- পরে যোগ করতে পারো -->
+            </section>
+
+            <section>
+                <button><a href="{% url 'product_list' %}" class="btn btn-secondary btn-lg">
+                    Back to Products </a>
+                </button>
+            </section>
+        </div>
+    </section>
+</body>
+{% endblock %}

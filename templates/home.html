@@ -1,113 +1,185 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-container">
-        <div class="hero-text">
-            <h1 class="hero-title">MINIMAL DESIGN.<br><span class="blue">MAXIMUM IMPACT.</span></h1>
-            <p class="hero-subtitle">Experience shopping in pure black & white with blue accents</p>
-            <a href="{% url 'shop' %}" class="btn btn-blue">SHOP NOW →</a>
+
+
+
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-up">
+                <span class="gradient-text">Elevate Your</span>
+                <span class="gradient-text">Tech Experience</span>
+            </h1>
+            <p class="hero-subtitle animate-fade-up delay-200">Premium gadgets designed for the modern lifestyle</p>
+            <a href="{% url 'product_list' %}" class="btn btn-primary animate-fade-up delay-400">Explore Products</a>
         </div>
-        <div class="hero-image">
-            <div class="image-placeholder animated-slide">
-                <!-- Animated black & white product image will go here -->
-                <div class="product-showcase">
-                    <div class="product-circle"></div>
-                    <div class="product-circle"></div>
-                    <div class="product-circle"></div>
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('media/headphones-hero.jpg');"></div>
+            <div class="slide" style="background-image: url('media/smartwatch-hero.jpg');"></div>
+            <div class="slide" style="background-image: url('media/earbuds-hero.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Featured Products Section -->
+    <section class="featured-products py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title display-5 fw-bold">Featured Products</h2>
+                <p class="section-subtitle lead text-muted">Discover our latest and premium collection</p>
+            </div>
+            
+            <div class="products-grid">
+                {% for product in latest_products %}
+                    <div class="product-card animate-on-scroll">
+                        <div class="product-image">
+                            {% if product.main_image %}
+                                <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{% static 'images/placeholder-product.jpg' %}" alt="Placeholder">
+                            {% endif %}
+                            
+                            <!-- Overlay on Hover -->
+                            <div class="product-overlay">
+                                <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline">View Details</a>
+                            </div>
+
+                            <!-- Badge -->
+                            {% if forloop.first %}
+                                <div class="product-badge">Best Seller</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="product-info">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="product-category">{{ product.category }}</p>
+
+                            <p class="product-description">
+                                {{ product.short_description|truncatewords:20 }}
+                            </p>
+
+                            <!-- Rating -->
+                            <div class="product-rating">
+                                {% for i in "x"|ljust:5 %}
+                                    {% if forloop.counter <= product.rating|floatformat:0 %}
+                                        <i class="fas fa-star filled"></i>
+                                    {% elif forloop.counter == product.rating|floatformat:0|add:1 and product.rating|floatformat:1 > product.rating|floatformat:0 %}
+                                        <i class="fas fa-star-half-alt filled"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="rating-value">{{ product.rating }} ({{ product.review_count }})</span>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12 text-center">
+                        <p class="lead">No featured products yet. Check back soon!</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Explore Products Button -->
+            <div class="text-center mt-4 mt-md-5">
+                <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg px-5 py-3">
+                    Explore All Products
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Voxio</h2>
+                <p class="section-subtitle">Premium quality meets innovative design</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="feature-title">Premium Quality</h3>
+                    <p class="feature-description">All our products are crafted with high-grade materials and undergo rigorous quality testing.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">Dedicated Support</h3>
+                    <p class="feature-description">Our customer support team is available 24/7 to assist with any questions or issues.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="feature-title">Fast Shipping</h3>
+                    <p class="feature-description">We partner with trusted carriers to ensure your products arrive quickly and safely.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3 class="feature-title">Best Warranty</h3>
+                    <p class="feature-description">All Voxio products come with a comprehensive possible manufacturer warranty.</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Featured Products -->
-<section class="featured">
-    <div class="section-header">
-        <h2>FEATURED <span class="blue">PRODUCTS</span></h2>
-        <p>Curated selection of our best items</p>
-    </div>
-    
-    <div class="products-grid">
-        {% for product in featured_products %}
-        <div class="product-card">
-            <div class="product-image">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                {% else %}
-                <div class="image-placeholder">No Image</div>
-                {% endif %}
-                <div class="product-overlay">
-                    <button class="quick-view" data-id="{{ product.id }}">Quick View</button>
-                </div>
-            </div>
-            <div class="product-info">
-                <h3>{{ product.name }}</h3>
-                <p class="product-price">৳{{ product.price }}</p>
-                <button class="add-to-cart" data-id="{{ product.id }}">Add to Cart</button>
-            </div>
-        </div>
-        {% empty %}
-        <div class="no-products">
-            <p>No featured products available.</p>
-            <a href="{% url 'shop' %}" class="btn">Browse All Products</a>
-        </div>
-        {% endfor %}
-    </div>
-</section>
 
-<!-- Features Section -->
-<section class="features">
-    <div class="features-container">
-        <div class="feature-card">
-            <div class="feature-icon">
-                <i class="fas fa-shipping-fast"></i>
-            </div>
-            <h3>Free Delivery</h3>
-            <p>On orders over ৳2000</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">
-                <i class="fas fa-phone-alt"></i>
-            </div>
-            <h3>Call to Confirm</h3>
-            <p>We call to verify your order</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3>Secure Checkout</h3>
-            <p>No login required</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">
-                <i class="fas fa-download"></i>
-            </div>
-            <h3>Easy Invoice</h3>
-            <p>Download invoice instantly</p>
-        </div>
-    </div>
-</section>
 
-<!-- Call to Action -->
-<section class="cta">
-    <div class="cta-container">
-        <h2>READY TO EXPERIENCE<br><span class="blue">MINIMALIST SHOPPING?</span></h2>
-        <p>No accounts, no passwords, just pure shopping experience</p>
-        <a href="{% url 'shop' %}" class="btn btn-blue">START SHOPPING →</a>
-    </div>
-</section>
 
-<!-- Quick View Modal -->
-<div id="quickViewModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div id="modal-product-details">
-            <!-- Product details will be loaded here via JavaScript -->
-        </div>
-    </div>
-</div>
+
+
+
+
+
+
+
 {% endblock %}
