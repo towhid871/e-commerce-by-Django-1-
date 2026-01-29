@@ -1,0 +1,17 @@
+# Django specific
+*.pyc
+__pycache__/
+*.py[cod]
+*.log
+*.pot
+*.sqlite3                 # ← এটা অবশ্যই থাকবে
+db.sqlite3                # ← এটাও
+media/                    # ← সম্পূর্ণ media ফোল্ডার
+media/*                   # অথবা এভাবে
+venv/
+.env
+.env.local
+.env.development
+.env.production
+.DS_Store
+Thumbs.db
