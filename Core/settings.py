@@ -28,9 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '.onrender.com',              # ← এটা যোগ করো (সব Render সাইটের জন্য কাজ করবে)
-    'voxio.onrender.com',         # ← তোমার সাইটের সঠিক ডোমেইন যোগ করো
-    'www.voxio.onrender.com',     # ← অপশনাল (www সহ)
+    '.onrender.com',              
+    'voxio.onrender.com',
+    'https://voxio.onrender.com/',
+    'www.voxio.onrender.com',     
 ]
 
 
