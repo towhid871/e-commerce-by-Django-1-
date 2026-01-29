@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-(!$=vyaeuy&7a25$*#t#(^ef_vf=p!_&pm9ne0jf7f%nqyprv4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.onrender.com',              # ← এটা যোগ করো (সব Render সাইটের জন্য কাজ করবে)
+    'voxio.onrender.com',         # ← তোমার সাইটের সঠিক ডোমেইন যোগ করো
+    'www.voxio.onrender.com',     # ← অপশনাল (www সহ)
+]
 
 
 # Application definition
