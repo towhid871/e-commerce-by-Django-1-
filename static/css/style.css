@@ -2022,3 +2022,59 @@ textarea.form-control {
     font-size: 18px;
     opacity: 0.75;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.faq-section {
+    padding: 5rem 0;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: #1a1a1a;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: background 0.3s;
+}
+
+.faq-question:hover {
+    background: #2a2a2a;
+}
+
+.faq-question h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.faq-answer {
+    display: none;
+    padding: 1.5rem;
+    background: #111;
+    border-radius: 0 0 8px 8px;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-question i {
+    transition: transform 0.3s;
+}
